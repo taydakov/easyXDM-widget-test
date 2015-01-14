@@ -1,0 +1,37 @@
+<!doctype html>
+<html>
+	<head>
+		<title>Consumer - easyXDM widget example</title>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/easyXDM/2.4.17.1/easyXDM.debug.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/easyXDM/2.4.17.1/easyXDM.Widgets.debug.js"></script>
+	</head>
+	<body>
+		This is a widget consumer
+
+		<!-- Widget initialization -->
+
+		<div id="mywidget1placeholder"></div>
+		<div id="mywidget2placeholder"></div>
+		<div id="mywidget3placeholder"></div>
+
+		<script>
+			var _widgetManager = new easyXDM.WidgetManager({});
+
+			_widgetManager.addWidget("mywidget.html", {
+				container: document.getElementById("mywidget1placeholder")
+			});
+		</script>
+
+		<!-- Widget messaging testing -->
+
+		<button onclick="publish()">PUBLISH MESSAGE</button>
+
+		<script>
+			function publish() {
+				console.log("publish() called");
+
+				_widgetManager.publish("testTopic", { testvar: "Test data for testvar" });
+			}
+		</script>
+	</body>
+</html>
