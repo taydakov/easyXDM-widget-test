@@ -1,0 +1,48 @@
+<!doctype html>
+<html>
+	<title>My Widget - easyXDM widget example</title>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/easyXDM/2.4.17.1/easyXDM.debug.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/easyXDM/2.4.17.1/easyXDM.Widgets.debug.js"></script>
+	</head>
+	<body>
+		This is my example widget #1
+
+		<!-- Widget initialization -->
+
+		<script>
+			var widget = new easyXDM.Widget({
+				subscriptions: ["testTopic", "testResponse"],
+				initialize: function (widget, widgetManager) {
+					// Set up the widget
+
+					// Render the UI
+
+					// Register the handler for incoming messages
+					widget.registerMessageHandler(function(url, topic, data) {
+						console.log("My Widget #1. Message received. url: ", url ,", topic: ", topic, ", data: " , data);
+
+						if (topic === "testTopic") {
+							console.log("My Widget #1. publishing a response...");
+							widget.publish("testResponse", { tesrresponsevar: "From #1, test response data for testresponsevar" });
+						}
+					});
+				},
+				initialized: function (widget, widgetManager) {
+				}
+			});
+		</script>
+
+		<!-- Widget messaging testing -->
+
+		<button onclick="publish()">PUBLISH MESSAGE FROM WIDGET #1</button>
+
+		<script>
+			function publish() {
+				console.log("My Widget #1. publish() called");
+
+				console.log("My Widget #1. publishing a message...");
+				widget.publish("testTopic", { testvar: "From #1, test data for testvar" });
+			}
+		</script>		
+	</body>
+</html>

@@ -6,7 +6,7 @@
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/easyXDM/2.4.17.1/easyXDM.Widgets.debug.js"></script>
 	</head>
 	<body>
-		This is a widget consumer
+		This is a widgets consumer. Check console for logs.
 
 		<!-- Widget initialization -->
 
@@ -17,20 +17,27 @@
 		<script>
 			var _widgetManager = new easyXDM.WidgetManager({});
 
-			_widgetManager.addWidget("mywidget.html", {
+			_widgetManager.addWidget("mywidget1.html", {
 				container: document.getElementById("mywidget1placeholder")
+			});
+			_widgetManager.addWidget("mywidget2.html", {
+				container: document.getElementById("mywidget2placeholder")
+			});
+			_widgetManager.addWidget("mywidget3.html", {
+				container: document.getElementById("mywidget3placeholder")
 			});
 		</script>
 
 		<!-- Widget messaging testing -->
 
-		<button onclick="publish()">PUBLISH MESSAGE</button>
+		<button onclick="publish()">PUBLISH MESSAGE FROM HOST</button>
 
 		<script>
 			function publish() {
-				console.log("publish() called");
+				console.log("Host. publish() called");
 
-				_widgetManager.publish("testTopic", { testvar: "Test data for testvar" });
+				console.log("Host. publishing a message...");
+				_widgetManager.publish("testTopic", { testvar: "From Host, test data for testvar" });
 			}
 		</script>
 	</body>
